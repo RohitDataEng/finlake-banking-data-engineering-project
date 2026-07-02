@@ -3,7 +3,7 @@
 Use this structure when you create your S3 bucket.
 
 ```text
-s3://finlake-banking-project-rohit/
+s3://finlake-banking-project/
     raw/
         branch_master/
         customers/
@@ -23,13 +23,3 @@ s3://finlake-banking-project-rohit/
     checkpoints/
         autoloader/
 ```
-
-## Naming Advice
-
-Use a globally unique bucket name. Example:
-
-```text
-finlake-banking-project-rohit-2026
-```
-
-Do not store secret keys, passwords, or personal data in GitHub.
