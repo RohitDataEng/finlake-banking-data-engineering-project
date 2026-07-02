@@ -1,0 +1,16 @@
+branch_id,branch_name,city,state,region,opened_date,is_active
+BR001,Mumbai Main Branch,Mumbai,Maharashtra,West,2013-02-03,Y
+BR002,Pune Main Branch,Pune,Maharashtra,West,2014-03-05,Y
+BR003,Bengaluru Main Branch,Bengaluru,Karnataka,South,2015-04-07,Y
+BR004,Hyderabad Main Branch,Hyderabad,Telangana,South,2016-05-09,Y
+BR005,Chennai Main Branch,Chennai,Tamil Nadu,South,2017-06-11,Y
+BR006,Delhi Main Branch,Delhi,Delhi,North,2018-07-13,Y
+BR007,Noida Main Branch,Noida,Uttar Pradesh,North,2019-08-15,Y
+BR008,Gurugram Main Branch,Gurugram,Haryana,North,2012-09-17,Y
+BR009,Kolkata Main Branch,Kolkata,West Bengal,East,2013-10-19,Y
+BR010,Ahmedabad Main Branch,Ahmedabad,Gujarat,West,2014-11-21,Y
+BR011,Jaipur Main Branch,Jaipur,Rajasthan,North,2015-12-23,Y
+BR012,Kochi Main Branch,Kochi,Kerala,South,2016-01-25,Y
+BR013,Indore Main Branch,Indore,Madhya Pradesh,Central,2017-02-27,Y
+BR014,Lucknow Main Branch,Lucknow,Uttar Pradesh,North,2018-03-01,Y
+BR015,Chandigarh Main Branch,Chandigarh,Chandigarh,North,2019-04-03,Y
