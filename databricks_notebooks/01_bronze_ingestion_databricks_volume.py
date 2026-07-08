@@ -1,6 +1,6 @@
 # Databricks notebook source
 # MAGIC %md
-# MAGIC # Day 3 - Proper Databricks Bronze Ingestion
+# MAGIC # Databricks Bronze Ingestion
 # MAGIC
 # MAGIC This notebook uses Databricks + PySpark.
 # MAGIC
