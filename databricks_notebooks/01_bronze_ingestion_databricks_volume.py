@@ -40,9 +40,9 @@ from pyspark.sql.types import StructType, StructField, StringType, IntegerType, 
 
 # COMMAND ----------
 
-CATALOG = "workspace"       # Change if needed
-SCHEMA = "default"          # Change if needed
-VOLUME = "finlake_volume"   # Change if needed
+CATALOG = "workspace"       
+SCHEMA = "default"          
+VOLUME = "finlake_volume"   
 
 VOLUME_ROOT = f"/Volumes/{CATALOG}/{SCHEMA}/{VOLUME}"
 BASE_PATH = f"{VOLUME_ROOT}/s3"
@@ -190,13 +190,11 @@ delinquency_schema = StructType([
 
 def load_csv_to_bronze(source_name: str, input_folder: str, schema: StructType, table_name: str):
     input_path = f"{RAW_PATH}/{input_folder}/"
-    output_path = f"{BRONZE_PATH}/{table_name}/"
     full_table_name = f"{CATALOG}.{SCHEMA}.{table_name}"
 
     print("=" * 80)
     print(f"Source: {source_name}")
     print(f"Input: {input_path}")
-    print(f"Output: {output_path}")
     print(f"Table: {full_table_name}")
 
     raw_df = (
@@ -206,12 +204,12 @@ def load_csv_to_bronze(source_name: str, input_folder: str, schema: StructType, 
         .option("mode", "PERMISSIVE")
         .schema(schema)
         .load(input_path)
+        .select("*", F.col("_metadata.file_path").alias("source_file_name"))
     )
 
     bronze_df = (
         raw_df
         .withColumn("ingestion_timestamp", F.current_timestamp())
-        .withColumn("source_file_name", F.input_file_name())
         .withColumn("load_date", F.current_date())
         .withColumn("pipeline_layer", F.lit("BRONZE"))
         .withColumn("source_system", F.lit(source_name))
@@ -222,16 +220,10 @@ def load_csv_to_bronze(source_name: str, input_folder: str, schema: StructType, 
         .format("delta")
         .mode("overwrite")
         .option("overwriteSchema", "true")
-        .save(output_path)
+        .saveAsTable(full_table_name)
     )
 
-    spark.sql(f"""
-        CREATE TABLE IF NOT EXISTS {full_table_name}
-        USING DELTA
-        LOCATION '{output_path}'
-    """)
-
-    count_value = bronze_df.count()
+    count_value = spark.table(full_table_name).count()
     print(f"Loaded records: {count_value}")
 
     return count_value
