@@ -6,3 +6,7 @@ __pycache__/
 secrets/
 credentials/
 *.pem
+.venv/
+dbt/finlake_dbt/target/
+dbt/finlake_dbt/logs/
+dbt/finlake_dbt/dbt_packages/

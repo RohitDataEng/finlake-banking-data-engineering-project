@@ -1,0 +1,39 @@
+version: 2
+models:
+  - name: stg_customer_loan_summary
+    columns:
+      - name: CUSTOMER_ID
+        tests: [not_null, unique]
+      - name: RISK_CATEGORY
+        tests:
+          - accepted_values:
+              values: ['LOW', 'MEDIUM', 'HIGH']
+  - name: stg_branch_performance_summary
+    columns:
+      - name: BRANCH_ID
+        tests: [not_null, unique]
+      - name: IS_ACTIVE
+        tests:
+          - accepted_values:
+              values: ['Y', 'N']
+  - name: stg_loan_default_risk_summary
+    columns:
+      - name: LOAN_ID
+        tests: [not_null, unique]
+      - name: CUSTOMER_ID
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_customer_loan_summary')
+              field: CUSTOMER_ID
+      - name: RISK_CATEGORY
+        tests:
+          - accepted_values:
+              values: ['LOW', 'MEDIUM', 'HIGH', 'CRITICAL']
+  - name: stg_monthly_collection_summary
+    columns:
+      - name: EMI_DUE_MONTH
+        tests: [not_null]
+      - name: LOAN_TYPE
+        tests: [not_null]
+  - name: stg_portfolio_kpis

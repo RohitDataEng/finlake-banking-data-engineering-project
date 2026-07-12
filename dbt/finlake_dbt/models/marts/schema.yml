@@ -1,0 +1,34 @@
+version: 2
+models:
+  - name: mart_high_risk_loans
+    columns:
+      - name: LOAN_ID
+        tests: [not_null, unique]
+      - name: RISK_CATEGORY
+        tests:
+          - accepted_values:
+              values: ['HIGH', 'CRITICAL']
+  - name: mart_branch_risk_dashboard
+    columns:
+      - name: BRANCH_ID
+        tests: [not_null, unique]
+      - name: BRANCH_HEALTH_STATUS
+        tests:
+          - accepted_values:
+              values: ['HEALTHY_BRANCH', 'WATCHLIST_BRANCH', 'HIGH_RISK_BRANCH']
+  - name: mart_collection_trend
+    columns:
+      - name: EMI_DUE_MONTH
+        tests: [not_null]
+      - name: COLLECTION_PERFORMANCE_BAND
+        tests:
+          - accepted_values:
+              values: ['EXCELLENT', 'GOOD', 'NEEDS_ATTENTION', 'POOR']
+  - name: mart_portfolio_executive_summary
+    columns:
+      - name: KPI_DATE
+        tests: [not_null]
+      - name: PORTFOLIO_HEALTH_STATUS
+        tests:
+          - accepted_values:
+              values: ['LOW_PORTFOLIO_RISK', 'MEDIUM_PORTFOLIO_RISK', 'HIGH_PORTFOLIO_RISK']

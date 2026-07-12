@@ -1,0 +1,28 @@
+version: 2
+sources:
+  - name: snowflake_gold
+    database: FINLAKE_ANALYTICS
+    schema: GOLD
+    description: "Databricks Gold tables loaded into Snowflake."
+    tables:
+      - name: GOLD_CUSTOMER_LOAN_SUMMARY
+        columns:
+          - name: CUSTOMER_ID
+            tests: [not_null, unique]
+      - name: GOLD_BRANCH_PERFORMANCE_SUMMARY
+        columns:
+          - name: BRANCH_ID
+            tests: [not_null, unique]
+      - name: GOLD_MONTHLY_COLLECTION_SUMMARY
+        columns:
+          - name: EMI_DUE_MONTH
+            tests: [not_null]
+          - name: LOAN_TYPE
+            tests: [not_null]
+      - name: GOLD_LOAN_DEFAULT_RISK_SUMMARY
+        columns:
+          - name: LOAN_ID
+            tests: [not_null, unique]
+          - name: CUSTOMER_ID
+            tests: [not_null]
+      - name: GOLD_PORTFOLIO_KPIS
